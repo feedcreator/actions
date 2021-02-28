@@ -1,0 +1,20 @@
+name: update-feeds
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+env:
+  GOOGLE_APPLICATION_CREDENTIALS: ${{secrets.FEED_GOOGLE_APPLICATION_CREDENTIALS}}
+  GOOGLE_CLOUD_STRORAGE_BUCKET: ${{secrets.FEED_GOOGLE_CLOUD_STRORAGE_BUCKET}}
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{ secrets.FEED_GITHUB_REPOSITORY }}
+          token: ${{ secrets.FEED_GITHUB_PAT }}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - run: yarn
+      - run: yarn ts-node --script-mode --transpile-only scripts/update-feeds.ts
