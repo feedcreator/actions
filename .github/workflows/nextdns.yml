@@ -1,0 +1,17 @@
+name: nextdns
+on:
+  workflow_dispatch:
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{ secrets.NEXTDNS_GITHUB_REPOSITORY }}
+          token: ${{ secrets.NEXTDNS_GITHUB_PAT }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: yarn
+      - run: yarn
+      - run: yarn ts-node --script-mode --transpile-only scripts/update-feeds.ts
