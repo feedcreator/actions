@@ -1,6 +1,7 @@
 name: nextdns
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: "0 8,20 * * *"
 env:
   NEXTDNS_API_KEY: ${{secrets.NEXTDNS_API_KEY}}
 jobs:
