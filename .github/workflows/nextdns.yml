@@ -23,4 +23,4 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: run
-          args: --release -- update --source ${{ secrets.NEXTDNS_SOURCE_URL }} --profile ${{ secrets.NEXTDNS_PROFILE_ID }}
+          args: --release -- update --source ${{ secrets.NEXTDNS_SOURCE_URL }} --profile ${{ secrets.NEXTDNS_PROFILE_ID }} --force
