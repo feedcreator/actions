@@ -2,6 +2,7 @@ name: update-feeds
 on:
   schedule:
     - cron: "*/10 * * * *"
+  workflow_dispatch:
 env:
   GOOGLE_APPLICATION_CREDENTIALS: ${{secrets.FEED_GOOGLE_APPLICATION_CREDENTIALS}}
   GOOGLE_CLOUD_STRORAGE_BUCKET: ${{secrets.FEED_GOOGLE_CLOUD_STRORAGE_BUCKET}}
