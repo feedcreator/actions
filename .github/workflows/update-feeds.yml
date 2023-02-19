@@ -1,7 +1,7 @@
 name: update-feeds
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: "*/10 * * * *"
 env:
   GOOGLE_APPLICATION_CREDENTIALS: ${{secrets.FEED_GOOGLE_APPLICATION_CREDENTIALS}}
   GOOGLE_CLOUD_STRORAGE_BUCKET: ${{secrets.FEED_GOOGLE_CLOUD_STRORAGE_BUCKET}}
@@ -9,13 +9,17 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
           repository: ${{ secrets.FEED_GITHUB_REPOSITORY }}
           token: ${{ secrets.FEED_GITHUB_PAT }}
-      - uses: actions/setup-node@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          node-version: '16'
-          cache: 'yarn'
-      - run: yarn
-      - run: yarn ts-node --script-mode --transpile-only scripts/update-feeds.ts
+          node-version-file: package.json
+          cache: yarn
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Update feeds
+        run: yarn run update-feeds
