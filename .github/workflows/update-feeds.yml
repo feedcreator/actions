@@ -1,4 +1,4 @@
-name: update-feeds
+name: Update Feeds
 on:
   schedule:
     - cron: "*/10 * * * *"
