@@ -1,4 +1,4 @@
-name: activate
+name: Activate
 on:
   schedule:
     - cron: "0 0 * * 0"
