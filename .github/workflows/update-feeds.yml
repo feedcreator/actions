@@ -19,8 +19,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: package.json
-          cache: yarn
+          cache: npm
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
       - name: Update feeds
-        run: yarn run update-feeds
+        run: npm run update-feeds
